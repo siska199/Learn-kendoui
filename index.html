@@ -10,6 +10,10 @@
     <article>
         <div id="grid"></div>
         <button id="btnComments" >See Comment</button>
+        <div id="windowComments">
+
+        </div>
+        <div id="gridComments"></div>
     </article>
     
 
@@ -18,6 +22,15 @@
     <script src="https://kendo.cdn.telerik.com/2022.3.913/js/kendo.all.min.js"></script>
     <script src="./js/script.js"></script>
 
-
+    <script type="type/x-template-kendo" id="myWindowComments">
+        # for (var j = 0; j < data.length; j++) { #
+            <ul>
+                <li>#: data[j].postId#</li>
+                <li>#: data[j].name#</li>
+                <li>#: data[j].email#<</li>
+                <li>#: data[j].body#<</li>
+            </ul>
+           # } #
+    </script>
 </body>
 </html>

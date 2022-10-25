@@ -59,5 +59,19 @@ $(function () {
       `https://jsonplaceholder.typicode.com/posts/${data.id}/comments`
     ).then((res) => res.json());
     console.log("comments: ", comments);
+
+    const templateComments = kendo.template($("#myWindowComments").html());
+    $("#windowComments").kendoWindow({
+      height: 500,
+      width: 500,
+      title: `Comments Post with id: ${data.id}`,
+      modal: true,
+    });
+    
+    const windowCommentsElmn = $("#windowComments")
+      .data("kendoWindow")
+      .content(templateComments(comments));
+
+    windowCommentsElmn.center().open();
   });
 });
