@@ -25,8 +25,14 @@ $(function () {
   const templateV2 = kendo.template($("#myFeedItems").html())
   const dataV2 = [{Name: "Anton"}, { Name: "Michael"}, { Name: "John"}];
   const resultv2 = templateV2(dataV2)
-  $("#feedItems").html(result);
+  $("#feedItems").html(resultv2);
 
-  
+  //Example template try to make sure my understanding
+  const dataV3 = {
+    name : "Siska Apriana Rifianti",
+    umur : 23
+  }
+  const templateV3 = kendo.template($("#myTemplateV3").html())
+  $("#tryV3").html(templateV3(dataV3))
 
 });
