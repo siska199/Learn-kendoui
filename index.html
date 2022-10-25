@@ -9,6 +9,7 @@
 <body>
     <article>
         <div id="renderTemplate"></div>
+        <ul id="feedItems"></ul>
     </article>
 
     <script type="text/x-kendo-template" id="myTemplate">
@@ -19,6 +20,18 @@
                 <div><b>#: product #</b> are not shipped yet</div>
             #}#
         </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="myFeedItems">
+        # for (var i = 0; i < data.length; i++) { #
+            <li>
+            #= data[i].Name #
+                </li>
+        # } #
+    </script>
+
+    <script type="text/x-kendo-template" id="myTemplateV3">
+
     </script>
 
     <link href="https://kendo.cdn.telerik.com/2022.3.913/styles/kendo.default-main.min.css" rel="stylesheet" />
