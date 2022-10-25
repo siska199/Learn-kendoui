@@ -176,7 +176,7 @@ $(function () {
         },
       },
     },
-    pageSize: 10,
+    pageSize:5, // Idetification how many data tahta whil appear in every page 
     sort: {
       filed: "OrderDate",
       dir: "desc",
@@ -190,6 +190,7 @@ $(function () {
     sortable: true,
     filterable: true,
     selectable: true,
+
     columns: [
       {
         field: "OrderID",
