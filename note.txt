@@ -1,0 +1,1 @@
+https://docs.telerik.com/kendo-ui/controls/data-management/grid/Templates/group-templates
