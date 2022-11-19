@@ -1,26 +1,56 @@
 $(function () {
-  $("#grid").kendoGrid({
-    dataSource: {
-      transport: {
-        read: async function (e) {
-          const res = await fetch(
-            "https://jsonplaceholder.typicode.com/posts"
-          ).then((res) => res.json());
-          const dataRes = res.map((data, i) => ({
-            ...data,
-            name: `name ${i}`,
-            image:
-              "https://i.pinimg.com/564x/bb/06/bf/bb06bf438532886a42d6a32f29db1632.jpg",
-          }));
-          e.success(dataRes);
+  const dataSource = new kendo.data.DataSource({
+    transport: {
+      read: async function (e) {
+        const grid = $("#grid").data("kendoGrid");
+        console.log(grid.dataSource.page());
+        const res = await fetch(
+          "https://jsonplaceholder.typicode.com/posts"
+        ).then((res) => res.json());
+        const dataRes = res.map((data, i) => ({
+          ...data,
+          name: `name ${i}`,
+          image:
+            "https://i.pinimg.com/564x/bb/06/bf/bb06bf438532886a42d6a32f29db1632.jpg",
+        }));
+
+        const dataFinally = {
+          totalItems: dataRes.length,
+          dataDisplay: dataRes.slice(1, 5),
+        };
+        e.success(dataFinally);
+      },
+    },
+    schema: {
+      data: "dataDisplay",
+      total: "totalItems",
+      model: {
+        fields: {
+          id: { type: "number" },
+          userId: { type: "string" },
+          name: { type: "name" },
+          image: { type: "image" },
+          body: { type: "body" },
         },
       },
     },
+
+    serverPaging: true,
+    serverFiltering: true,
+    serverSorting: true,
+    pageSize: 5,
+  });
+
+  $("#grid").kendoGrid({
+    dataSource,
     height: 500,
     pageable: {
       buttonCount: 3,
       pageSize: 5,
       pageSizes: ["5", "10", "20", "50 ", "all"],
+      change: function (e) {
+        console.log("change page");
+      },
     },
     scrollable: true,
     selectable: true,
@@ -58,7 +88,6 @@ $(function () {
     const comments = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${data.id}/comments`
     ).then((res) => res.json());
-    console.log("comments: ", comments);
 
     const templateComments = kendo.template($("#myWindowComments").html());
     $("#windowComments").kendoWindow({
@@ -67,7 +96,7 @@ $(function () {
       title: `Comments Post with id: ${data.id}`,
       modal: true,
     });
-    
+
     const windowCommentsElmn = $("#windowComments")
       .data("kendoWindow")
       .content(templateComments(comments));
